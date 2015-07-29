@@ -1,7 +1,8 @@
 package com.shuhuan.zufeng.app.parsers;
 
-import com.shuhuan.zufeng.app.impl.CategoryTagMenuTask;
 import com.shuhuan.zufeng.app.model.CategoryTagMenu;
+import com.shuhuan.zufeng.app.model.DiscoveryCategory;
+import com.shuhuan.zufeng.app.model.DiscoveryTab;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +20,35 @@ import java.util.List;
 public final class DataParser  {
 
     private DataParser(){}
+
+    public static List<DiscoveryCategory> parseDiscoveryCategory(JSONObject json)
+    {
+        List<DiscoveryCategory> ret = null;
+
+        if (json != null) {
+            try {
+                int code = json.getInt("ret");
+                if (code == 0)
+                {
+                    JSONArray jsonArray = json.getJSONArray("list");
+                    int len = jsonArray.length();
+                    if (len>0)
+                    {
+                        ret = new LinkedList<DiscoveryCategory>();
+                        for (int i = 0; i < len; i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            DiscoveryCategory category = new DiscoveryCategory();
+                            category.parseJSON(jsonObject);
+                            ret.add(category);
+                        }
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return ret;
+    }
 
     /**
      * 解析CategoryTagMenu 返回的JSON结果
@@ -60,6 +90,42 @@ public final class DataParser  {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+        return ret;
+    }
+
+    /**
+     *
+     * 解析发现的标题
+     * @param jsonObject
+     * @return
+     */
+    public static List<DiscoveryTab> parseDiscoveryTabs(JSONObject jsonObject) {
+
+        List<DiscoveryTab> ret = null;
+
+        try {
+            int code = jsonObject.getInt("ret");
+            if (code ==0)
+            {
+                JSONObject tabs = jsonObject.getJSONObject("tabs");
+                JSONArray array = tabs.getJSONArray("list");
+                if (array != null) {
+                    int len = array.length();
+                    if (len>0)
+                    {
+                        ret = new LinkedList<DiscoveryTab>();
+                        for (int i = 0; i < len; i++) {
+                            DiscoveryTab tab = new DiscoveryTab();
+                            tab.parseJSON(array.getJSONObject(i));
+                            ret.add(tab);
+                        }
+                    }
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         return ret;
     }

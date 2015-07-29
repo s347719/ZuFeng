@@ -20,5 +20,4 @@
     <string name="main_discovery_profile_text">我</string>
     <string name="main_discovery_downloadting_text">下载听</string>
     <string name="main_discovery_custom_text">定制听</string>
-    <string name="main_discovery_discovery_text">发现</string>
 </resources>

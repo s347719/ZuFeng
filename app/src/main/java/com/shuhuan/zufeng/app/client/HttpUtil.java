@@ -9,6 +9,7 @@ package com.shuhuan.zufeng.app.client;
  */
 
 import android.os.Build;
+import android.util.Log;
 import com.shuhuan.zufeng.app.util.StreamUtil;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public final class HttpUtil {
     {
 
         byte[] ret = null;
-        if (ret != null) {
+        if (url != null) {
             // 注意释放连接
             HttpURLConnection conn = null;
             InputStream in =null;
@@ -70,6 +71,9 @@ public final class HttpUtil {
                 conn.connect();
                 //取出状态码
                 int code = conn.getResponseCode();
+
+                Log.i("---------","code=" + code);
+
                 if (code ==200)
                 {
                     in = conn.getInputStream();
@@ -99,7 +103,7 @@ public final class HttpUtil {
                 StreamUtil.close(conn);
             }
         }
-
+        Log.i("----------","ret="+ ret);
         return  ret ;
     }
 

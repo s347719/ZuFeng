@@ -8,6 +8,8 @@ package com.shuhuan.zufeng.app.client;
  * Created on 2015/7/28.
  */
 
+import android.util.Log;
+
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -20,6 +22,35 @@ public class ClientDiscoveryAPI {
 
     }
     //////////////////////////////////
+
+    /**
+     *   http://mobile.ximalaya.com/mobile/discovery/v1/tabs?device=android
+     * @return
+     */
+
+    public static String getDiscoveryTasbs()
+    {
+
+        String ret = null;
+        String url = SERVER_MOBILE +"/mobile/discovery/v1/tabs?device=android";
+
+        Log.i("---------","url="+url);
+
+        byte[] bytes = HttpUtil.doGet(url);
+        if (bytes != null) {
+            try {
+                ret = new String(bytes,"UTF-8");
+
+            } catch (UnsupportedEncodingException e) {
+                ret = new String (bytes);
+            }
+        }
+        Log.i("------------","ret=" + ret);
+        return ret;
+    }
+
+
+    //////////////////////////////
 
     /**
      *  获取分类Tag菜单<br/>
@@ -52,4 +83,29 @@ public class ClientDiscoveryAPI {
 
     }
 
+
+    /**
+     *
+     * 获取发现的分类<br/>
+     * 调用的接口：http://mobile.ximalaya.com/mobile/discovery/v1/categories?device=android&picVersion=10&scale=2<br/>
+     *
+     * @return
+     */
+    public static String getDiscoveryCategories() {
+        String ret =null;
+        String url = SERVER_MOBILE +"/mobile/discovery/v1/categories"
+                +"?device=android"
+                +"&picVersion=10"
+                +"scale=2";
+
+        byte[] bytes = HttpUtil.doGet(url);
+        if (bytes != null) {
+            try {
+                ret = new String(bytes,"UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                ret = new String(bytes);
+            }
+        }
+        return ret;
+    }
 }

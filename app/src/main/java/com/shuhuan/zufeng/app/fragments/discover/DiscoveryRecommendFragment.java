@@ -24,6 +24,6 @@ public class DiscoveryRecommendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_recommend, container, false);
+        return inflater.inflate(R.layout.fragment_discovery_recommend, container, false);
     }
 }

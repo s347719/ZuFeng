@@ -10,3 +10,16 @@
 2,网络模块
 
   1，联网工具类
+
+
+3，后台的数据请求流程
+
+   1，定义实体类
+   2，实体类内部的json解析
+   3，定义异步任务
+   4，定义实际的联网操作： url  参数
+   5，TaskResult.data 返回的是JSONObject
+   6，启动异步任务，编写TaskCallback 的回调
+   7，收到TaskResult.data  数据json 解析 DataParse
+   8，DataParse 返回数据对象，采用实体类解析自己的实体类
+   9，f更新数据

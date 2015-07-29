@@ -5,11 +5,11 @@ import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Window;
-import com.shuhuan.zufeng.app.impl.CategoryTagMenuTask;
 import com.shuhuan.zufeng.app.model.CategoryTagMenu;
 import com.shuhuan.zufeng.app.parsers.DataParser;
 import com.shuhuan.zufeng.app.tasks.TaskCallback;
 import com.shuhuan.zufeng.app.tasks.TaskResult;
+import com.shuhuan.zufeng.app.tasks.impl.CategoryTagMenuTask;
 import com.shuhuan.zufeng.app.util.PackageUtil;
 import org.json.JSONObject;
 

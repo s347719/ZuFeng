@@ -5,8 +5,9 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.RadioGroup;
-import com.shuhuan.zufeng.app.fragments.CustmFragment;
+import com.shuhuan.zufeng.app.fragments.CustomFragment;
 import com.shuhuan.zufeng.app.fragments.DiscoveryFragment;
 import com.shuhuan.zufeng.app.fragments.DownloadTingFragment;
 import com.shuhuan.zufeng.app.fragments.ProfileFragment;
@@ -15,7 +16,7 @@ import com.shuhuan.zufeng.app.fragments.ProfileFragment;
 public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener {
 
     private DiscoveryFragment discoveryFragment;
-    private CustmFragment customFrgment;
+    private CustomFragment customFrgment;
     private DownloadTingFragment downloadTingFragment;
     private ProfileFragment profileFragment;
 
@@ -38,14 +39,14 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         switch (checkedId)
         {
             case R.id.main_tab_item_discovery:
-                if (discoveryFragment != null) {
+                if (discoveryFragment == null) {
                     discoveryFragment = new DiscoveryFragment();
                 }
                 fragment= discoveryFragment;
                 break;
             case R.id.main_tab_item_custom1:
                 if (customFrgment == null) {
-                    customFrgment = new CustmFragment();
+                    customFrgment = new CustomFragment();
                 }
                 fragment= customFrgment;
                 break;
@@ -61,6 +62,12 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
                 }
                 fragment = profileFragment;
                 break;
+        }
+
+        if(fragment == null){
+            Log.d("----------","null");
+        } else {
+            Log.d("----------","not null");
         }
 
         transaction.replace(R.id.main_fragment_container,fragment);

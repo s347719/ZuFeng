@@ -1,4 +1,4 @@
-package com.shuhuan.zufeng.app.impl;
+package com.shuhuan.zufeng.app.tasks.impl;
 
 import com.shuhuan.zufeng.app.Constants;
 import com.shuhuan.zufeng.app.client.ClientDiscoveryAPI;

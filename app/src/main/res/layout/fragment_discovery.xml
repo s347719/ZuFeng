@@ -1,16 +1,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:orientation="vertical"
-             tools:context="com.shuhuan.zufeng.app.fragments.DiscoveryFragment">
+              tools:context="com.shuhuan.zufeng.app.fragments.DiscoveryFragment"
+        >
 
-
-    <TextView
-            android:layout_width="wrap_content"
+    <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/main_discovery_discovery_text"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
+        <ImageButton
+                android:id="@+id/discovery_title_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@android:drawable/ic_search_category_default"
+                />
+    </RelativeLayout>
+
+    <!-- Tab  栏-->
+
+    <android.support.design.widget.TabLayout
+            android:id="@+id/discover_tab_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="#F00"
+            app:tabIndicatorHeight="5dp"
             />
 
 
+    <!-- 内容区-->
+
+    <android.support.v4.view.ViewPager
+            android:id="@+id/discovery_tab_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 </LinearLayout>

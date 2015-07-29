@@ -26,11 +26,24 @@ public class Constants {
 
     //////////////////////////////////////////////////
 
+    /**
+     * DiscoveryTabTsk  使用的常量
+     */
+    public static final int TASK_DISCOVERY_TABS = 2;
 
+    /**
+     * DiscoveryCategoryTask 使用的常量
+     */
+    public static final int TASK_DISCOVERY_CATEGORYS = 3;
+
+    /**
+     *
+     * DiscoveryCategoryFragment  使用的常量
+     */
+    public static final int TASK_DISCOVERY_CATEGORIES = 4;
+    //////////////////////////////////////////////////////////////
     //SharedPreference 常量
-
     public static final String SP_NAME ="app";
-
     /**
      *  教程页上一次加载的版本号
      */

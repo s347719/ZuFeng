@@ -15,9 +15,9 @@ import com.shuhuan.zufeng.app.R;
  * Email:578076417@qq.com
  * Created on 2015/7/29.
  */
-public class CustmFragment extends Fragment {
+public class CustomFragment extends Fragment {
 
-    public CustmFragment() {
+    public CustomFragment() {
     }
 
     @Nullable
