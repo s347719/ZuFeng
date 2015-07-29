@@ -10,4 +10,15 @@
     <string name="title_activity_guide">GuideActivity</string>
 
     <string name="guide_start_main">Go!</string>
+    <string name="main_tab_item_discovery">发现</string>
+    <string name="main_tab_item_custom">定制听</string>
+    <string name="tab_item_download">下载听</string>
+    <string name="tab_item_me">我</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_discovery_profile_text">我</string>
+    <string name="main_discovery_downloadting_text">下载听</string>
+    <string name="main_discovery_custom_text">定制听</string>
+    <string name="main_discovery_discovery_text">发现</string>
 </resources>

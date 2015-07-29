@@ -11,6 +11,21 @@
 
  MainActivity  主界面
 
+ Fragment  内容
+
+    DiscoveryFragment  发现  栏目界面
+
+        子栏目  Fragmen
+        DiscoveryRecommendFragment      推荐子栏目
+        DiscoveryCategoryFragment       分类子栏目
+        DiscoveryLiveFragment           直播子栏目
+        DiscoveryRankingFragment        榜单子栏目
+        DiscoveryAnchorFragment         榜单子栏目
+
+
+    CustomFragment  定制听  界面
+    DownloadTingFragment  下载听界面
+    ProfileFragmen  我 界面
 
  /////////////////////
 
