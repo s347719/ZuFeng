@@ -158,7 +158,7 @@ public class DiscoveryFragment extends Fragment implements View.OnClickListener,
 
                 // 根据内容类型来加载设置制定的Fragment
                 String type = tabTitle.getContentType();
-                if ("recommend".equals(type))
+                    if ("recommend".equals(type))
                 {
                     subFragments.add(new DiscoveryRecommendFragment());
                 }
@@ -184,7 +184,6 @@ public class DiscoveryFragment extends Fragment implements View.OnClickListener,
             CommonFragmentPagerAdapter adapter = new CommonFragmentPagerAdapter(
                     getChildFragmentManager(),subFragments
             );
-
             pager.setAdapter(adapter);
 
             }

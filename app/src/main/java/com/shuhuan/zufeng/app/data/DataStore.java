@@ -8,7 +8,6 @@ package com.shuhuan.zufeng.app.data;
  * Created on 2015/7/29.
  */
 
-import android.app.Application;
 import com.shuhuan.zufeng.app.model.DiscoveryCategory;
 
 import java.util.Collections;
@@ -34,6 +33,7 @@ public class DataStore
     }
 
     public static void release()
+
     {
         ourInstance = null;
     }

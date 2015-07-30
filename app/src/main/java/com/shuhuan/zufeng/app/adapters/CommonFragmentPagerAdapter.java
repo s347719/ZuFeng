@@ -13,7 +13,8 @@ import java.util.List;
  * Email:578076417@qq.com
  * Created on 2015/7/29.
  */
-public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
+public class
+        CommonFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
     public CommonFragmentPagerAdapter(FragmentManager fm,List<Fragment> fragments) {

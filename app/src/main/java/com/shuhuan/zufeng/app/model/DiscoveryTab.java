@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * Email:578076417@qq.com
  * Created on 2015/7/29.
  */
-public class DiscoveryTab  {
+public class    DiscoveryTab  {
     /**
      * 显示DiscoveryFragment
      * 上面的Tab 标题
