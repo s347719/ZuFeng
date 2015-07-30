@@ -11,6 +11,11 @@ import com.shuhuan.zufeng.app.fragments.DiscoveryFragment;
 import com.shuhuan.zufeng.app.fragments.DownloadTingFragment;
 import com.shuhuan.zufeng.app.fragments.ProfileFragment;
 
+/**
+ *
+ * 主界面
+ *
+ */
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
@@ -23,6 +28,13 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ////////////////////////////////////////////////
+
+        setTitle("主界面");
+
+
+        //////////////////////////////////////////////
         RadioGroup tabBar = (RadioGroup) findViewById(R.id.main_tab_bar);
         tabBar.setOnCheckedChangeListener(this);
         //默认选中第一个
