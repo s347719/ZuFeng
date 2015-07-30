@@ -32,6 +32,10 @@
             android:name=".Test1Activity"
             android:label="@string/title_activity_test_recommend" >
         </activity>
+        <activity
+            android:name=".BaseActivity"
+            android:label="@string/title_activity_base" >
+        </activity>
     </application>
 
 </manifest>

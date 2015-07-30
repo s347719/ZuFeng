@@ -1,7 +1,6 @@
 package com.shuhuan.zufeng.app;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,10 +12,10 @@ import com.shuhuan.zufeng.app.fragments.DownloadTingFragment;
 import com.shuhuan.zufeng.app.fragments.ProfileFragment;
 
 
-public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
     private DiscoveryFragment discoveryFragment;
-    private CustomFragment customFrgment;
+    private CustomFragment customFragment;
     private DownloadTingFragment downloadTingFragment;
     private ProfileFragment profileFragment;
 
@@ -45,10 +44,10 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
                 fragment= discoveryFragment;
                 break;
             case R.id.main_tab_item_custom1:
-                if (customFrgment == null) {
-                    customFrgment = new CustomFragment();
+                if (customFragment == null) {
+                    customFragment = new CustomFragment();
                 }
-                fragment= customFrgment;
+                fragment= customFragment;
                 break;
             case R.id.main_tab_item_download:
                 if (downloadTingFragment == null) {
@@ -73,5 +72,10 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         transaction.replace(R.id.main_fragment_container,fragment);
         transaction.commit();
 
+    }
+
+    @Override
+    protected int outExitAnimationId() {
+        return 0;
     }
 }
