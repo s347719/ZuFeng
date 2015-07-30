@@ -1,0 +1,53 @@
+1,UI  架子
+
+   扉页-----教程业------AD扉页广告-------主界面
+
+   主界面-----底部Tab  内容 Fragment
+
+   发现： 顶部标题与Tab，内容是ViewPager Tab从服务器取回来的
+
+
+2,网络模块
+
+  1，联网工具类
+
+
+3，后台的数据请求流程
+
+   1，定义实体类
+   2，实体类内部的json解析
+
+
+   3，定义异步任务
+   4，定义实际的联网操作： url  参数
+   5，TaskResult.data 返回的是JSONObject
+   6，启动异步任务，编写TaskCallback 的回调
+   7，收到TaskResult.data  数据json 解析 DataParse
+   8，DataParse 返回数据对象，采用实体类解析自己的实体类
+   9，f更新数据
+
+
+4，，
+
+    排列顺序
+         焦点图----------- focusImages
+         小编推荐-----------editorRecommendAlbums
+         精品听单 ------------specialColumn
+         发现新奇---------------discoveryColumns
+         热门推荐---------------hotRecommends
+
+      有些结构是包含了hasMore
+
+      内部结构不同
+
+      内容的展示：
+
+         可以参考的两种实现方式
+         a，使用ListVeiw 实现复杂的多布局复用的条目展示
+         b，使用ScrollView 通过代码进行动态的添加
+
+      确认使用ListView
+
+      对于推荐的Adapter 直接传递一个对象，内部包含不同的数据，通过这个对象再来加载ListView
+
+

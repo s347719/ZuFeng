@@ -23,6 +23,36 @@ public class ClientDiscoveryAPI {
     }
     //////////////////////////////////
 
+
+    /**
+     *http://mobile.ximalaya.com/mobile/discovery/v1/recommends?channel=and-f6&device=android&includeActivity=true&includeSpecial=true&scale=2&version=4.1.7.1
+     * @return
+     */
+    public static String getDiscoveryRecommend() {
+        String ret = null;
+
+        String url = SERVER_MOBILE+"/mobile/discovery/v1/recommends"
+                +"?channel=and-f6"
+                +"&device=android"
+                +"&includeActivity=true"
+                +"&includeSpecial=true"
+                +"&scale=2"
+                +"&version=4.1.7.1";
+
+        byte[] bytes = HttpUtil.doGet(url);
+
+        if (bytes != null) {
+            try {
+                ret = new String(bytes,"UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                ret = new String(bytes);
+            }
+        }
+
+        return ret;
+
+    }
+
     /**
      *   http://mobile.ximalaya.com/mobile/discovery/v1/tabs?device=android
      * @return
@@ -108,4 +138,6 @@ public class ClientDiscoveryAPI {
         }
         return ret;
     }
+
+
 }

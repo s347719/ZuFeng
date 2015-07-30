@@ -41,6 +41,12 @@ public class Constants {
      * DiscoveryCategoryFragment  使用的常量
      */
     public static final int TASK_DISCOVERY_CATEGORIES = 4;
+    /**
+     *
+     *DiscoveryRecommendTask 使用的常量
+     */
+    public static final int TASK_DISCOVERY_RECOMMEND = 5;
+
     //////////////////////////////////////////////////////////////
     //SharedPreference 常量
     public static final String SP_NAME ="app";
