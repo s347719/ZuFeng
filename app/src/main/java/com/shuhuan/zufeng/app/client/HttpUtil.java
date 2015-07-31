@@ -40,7 +40,7 @@ public final class HttpUtil {
      */
     public static byte[] doGet(String url)
     {
-
+        Log.d("======",url);
         byte[] ret = null;
         if (url != null) {
             // 注意释放连接

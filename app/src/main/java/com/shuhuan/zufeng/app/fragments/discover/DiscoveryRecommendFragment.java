@@ -15,6 +15,7 @@ import com.shuhuan.zufeng.app.Constants;
 import com.shuhuan.zufeng.app.R;
 import com.shuhuan.zufeng.app.SettingsActivity;
 import com.shuhuan.zufeng.app.Test1Activity;
+import com.shuhuan.zufeng.app.adapters.DiscoveryRecommendAdapter;
 import com.shuhuan.zufeng.app.model.DiscoveryRecommend;
 import com.shuhuan.zufeng.app.model.discoveryrecommend.DiscoveryDiscoveryColumns;
 import com.shuhuan.zufeng.app.parsers.DataParser;
@@ -36,6 +37,7 @@ import java.util.List;
  */
 public class DiscoveryRecommendFragment extends Fragment implements AdapterView.OnItemClickListener, TaskCallback {
 
+
     public DiscoveryRecommendFragment() {
     }
 
@@ -50,37 +52,7 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
             //TODO  设置实际数据的  Adapter
         ////////////////////////////////
 
-            //添加头部
-
-            ImageView imageView = new ImageView(getActivity());
-            imageView.setImageResource(R.mipmap.ic_launcher);
-
-            listView.addHeaderView(imageView);
-
-
-            ImageView imageView1 = new ImageView(getActivity());
-            imageView1.setImageResource(R.mipmap.ic_action_search);
-
-            listView.addHeaderView(imageView1);
-
-            ///////////////////////
-
-            //添加底部视图
-            TextView btn  = new TextView(getActivity());
-            btn.setText("点击加载更多");
-            listView.addFooterView(btn);
-
-
-
-            ///////////////////////////////
-            ArrayList<String> strings = new ArrayList<String>();
-            for (int i = 0; i < 30; i++) {
-                strings.add("一匹大黑马"+i);
-            }
-            ArrayAdapter<String> adapter =
-                    new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,strings);
-
-
+            DiscoveryRecommendAdapter adapter = new DiscoveryRecommendAdapter(getActivity());
             listView.setAdapter(adapter);
 
             listView.setOnItemClickListener(this);
@@ -141,7 +113,6 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
                     {
                         JSONObject jsonObject = (JSONObject) data;
                         DiscoveryRecommend discoveryRecommend = DataParser.parseDiscoveryRecommend(jsonObject);
-
 
                         Log.i("--------",discoveryRecommend.toString());
 
