@@ -101,6 +101,7 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
         if (parent instanceof ListView)
         {
             ListView listView = (ListView) parent;
+
             int headerViewsCount = listView.getHeaderViewsCount();
 
             //调整因为 HeaderView 导致的偏移
@@ -141,13 +142,8 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
                         JSONObject jsonObject = (JSONObject) data;
                         DiscoveryRecommend discoveryRecommend = DataParser.parseDiscoveryRecommend(jsonObject);
 
-                        DiscoveryDiscoveryColumns discoveryDiscoveryColumns =
-                                discoveryRecommend.getDiscoveryDiscoveryColumns();
 
-                        String title = discoveryDiscoveryColumns.getTitle();
-
-
-                        Log.i("==============",title);
+                        Log.i("--------",discoveryRecommend.toString());
 
                     }
                 }

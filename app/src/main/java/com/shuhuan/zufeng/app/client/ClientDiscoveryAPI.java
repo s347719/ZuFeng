@@ -24,7 +24,10 @@ public class ClientDiscoveryAPI {
     //////////////////////////////////
 
 
+
     /**
+     *
+     * 获取recommend 中的数据
      *http://mobile.ximalaya.com/mobile/discovery/v1/recommends?channel=and-f6&device=android&includeActivity=true&includeSpecial=true&scale=2&version=4.1.7.1
      * @return
      */

@@ -13,6 +13,15 @@ repositories {
 }
 
 android {
+    signingConfigs {
+        release_sign {
+            keyAlias 'release'
+            keyPassword '123456'
+            storeFile file('../relrase.keystore')
+            storePassword '123456'
+        }
+    }
+
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
@@ -23,7 +32,6 @@ android {
         versionCode 1
         versionName "1.0"
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_6
         targetCompatibility JavaVersion.VERSION_1_6
@@ -32,12 +40,37 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release_sign
+        }
+    }
+    //代码检查选项
+    lintOptions {
+        //  当发现代码格式错误的时候是否终止  false
+        abortOnError false
+    }
+
+    //代表当前工程要发布多少套软件包
+    productFlavors {
+        defaultConfig
+                {
+
+                }
+
+        // 代表一套软件包，这一套也称作发布渠道
+        // 内部可以定制包ID 版本号，变异信息
+        // 如果没有制定的字段则使用  defaultConfig  里的内容
+        baidu {
+            applicationId "com.shuhuan.zufeng.app.baidu"
+            minSdkVersion 9
+            targetSdkVersion 22
+            versionCode 1
+            versionName "1.0"
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.android.support:design:22.2.0'

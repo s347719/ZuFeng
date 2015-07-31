@@ -156,7 +156,7 @@ public final class DataParser  {
                     String title = discoveryDiscoveryColumns.getString("title");
                     int locationInHotRecommend = discoveryDiscoveryColumns.getInt("locationInHotRecommend");
 
-                    List<ColumnsList> list  = new LinkedList<>();
+                    List<ColumnsList> list  = new LinkedList<ColumnsList>();
                     if (title != null && locationInHotRecommend ==0) {
                         JSONArray array = discoveryDiscoveryColumns.getJSONArray("list");
                         for (int i = 0; i < array.length(); i++) {
@@ -185,7 +185,7 @@ public final class DataParser  {
                 {
                     String title = discoveryEditorRecommendAlbums.getString("title");
                     boolean hasMore = discoveryEditorRecommendAlbums.getBoolean("hasMore");
-                    List<AlbumList> listAlbum = new LinkedList<>();
+                    List<AlbumList> listAlbum = new LinkedList<AlbumList>();
                     if (title!=null && hasMore)
                     {
                         JSONArray arrayAlbum = discoveryEditorRecommendAlbums.getJSONArray("list");
@@ -214,7 +214,7 @@ public final class DataParser  {
                 {
                     String title = discoveryHotRecommends.getString("title");
 
-                    List<HotRecommendFirstList> list = new LinkedList<>();
+                    List<HotRecommendFirstList> list = new LinkedList<HotRecommendFirstList>();
                     if (title!=null)
                     {
                         JSONArray listHotRecommend = discoveryHotRecommends.getJSONArray("list");
@@ -238,7 +238,7 @@ public final class DataParser  {
                 JSONObject discoveryFocusImages = jsonObject.getJSONObject("focusImages");
 
                 int code4 = discoveryFocusImages.getInt("ret");
-                List<FocusImage> listFocus = new LinkedList<>();
+                List<FocusImage> listFocus = new LinkedList<FocusImage>();
                 if (code4==0 ) {
                     String title = discoveryFocusImages.getString("title");
                     if (title != null) {
@@ -263,7 +263,7 @@ public final class DataParser  {
                 JSONObject discoverySpecialColumn = jsonObject.getJSONObject("specialColumn");
 
                 int code5 = discoverySpecialColumn.getInt("ret");
-                List<SpecialList> listSpecial = new LinkedList<>();
+                List<SpecialList> listSpecial = new LinkedList<SpecialList>();
                 if (code5==0)
                 {
                     String title  = discoverySpecialColumn.getString("title");

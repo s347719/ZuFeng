@@ -129,7 +129,6 @@ public class DiscoveryFragment extends Fragment implements View.OnClickListener,
                         JSONObject jsonObject = (JSONObject) data;
 
                         tabTitles=  DataParser.parseDiscoveryTabs(jsonObject);
-                        Log.i("---------------","1111111111111111");
                         updataTabs();
                     }
 
@@ -150,7 +149,6 @@ public class DiscoveryFragment extends Fragment implements View.OnClickListener,
         if (tabTitles!=null)
         {
             for (DiscoveryTab tabTitle : tabTitles) {
-                Log.i("---------------","1111111111111111" + tabTitle.getTitle());
                 TabLayout.Tab tab = tabBar.newTab();
                 tab.setText(tabTitle.getTitle());
 

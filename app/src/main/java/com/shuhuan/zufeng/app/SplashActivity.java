@@ -10,7 +10,9 @@ import com.shuhuan.zufeng.app.parsers.DataParser;
 import com.shuhuan.zufeng.app.tasks.TaskCallback;
 import com.shuhuan.zufeng.app.tasks.TaskResult;
 import com.shuhuan.zufeng.app.tasks.impl.CategoryTagMenuTask;
+import com.shuhuan.zufeng.app.util.MyLog;
 import com.shuhuan.zufeng.app.util.PackageUtil;
+import com.shuhuan.zufeng.app.util.UncaughtExceptionHandlerimpl;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -26,11 +28,21 @@ public class SplashActivity extends FragmentActivity implements TaskCallback {
 
         setContentView(R.layout.activity_splash);
 
+        //为当前线程，设置未捕获 异常的处理器
+        // 这个处理器就是用来保存未捕获异常日志的信息
+
+        Thread.UncaughtExceptionHandler handler =
+                new UncaughtExceptionHandlerimpl(getApplicationContext());
+        Thread.setDefaultUncaughtExceptionHandler(handler);
     }
 
     @Override
+
     protected void onResume() {
+
         super.onResume();
+
+        MyLog.d("Splash","3/0");
 
         //启动扉页,进行网络检查
         //下载数据，最终显示主界面

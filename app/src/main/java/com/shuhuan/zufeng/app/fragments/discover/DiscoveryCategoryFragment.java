@@ -3,6 +3,7 @@ package com.shuhuan.zufeng.app.fragments.discover;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.shuhuan.zufeng.app.parsers.DataParser;
 import com.shuhuan.zufeng.app.tasks.TaskCallback;
 import com.shuhuan.zufeng.app.tasks.TaskResult;
 import com.shuhuan.zufeng.app.tasks.impl.DiscoveryCategoryTask;
+import com.shuhuan.zufeng.app.util.MyLog;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -27,6 +29,7 @@ import java.util.List;
  */
 public class DiscoveryCategoryFragment extends Fragment implements TaskCallback {
 
+    private static final String TAG ="dcf";
     public DiscoveryCategoryFragment() {
     }
 
@@ -41,10 +44,13 @@ public class DiscoveryCategoryFragment extends Fragment implements TaskCallback 
         if (categories!=null &&! categories.isEmpty())
         {
             //TODO  有分类
+            MyLog.d(TAG,"Discovery category has.");
+
         }
 
         else {
             //TODO   无分类
+            MyLog.d(TAG,"No  Discovery category has.");
             DiscoveryCategoryTask task = new DiscoveryCategoryTask(this);
 
         }

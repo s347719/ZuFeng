@@ -43,7 +43,7 @@ public class HotRecommendFirstList {
 
         JSONArray array = json.getJSONArray("list");
 
-        list = new LinkedList<>();
+        list = new LinkedList<HotRecommendList>();
         for (int i = 0; i < array.length(); i++) {
             JSONObject jsonObject = array.getJSONObject(i);
             HotRecommendList hotRecommendList = new HotRecommendList();
