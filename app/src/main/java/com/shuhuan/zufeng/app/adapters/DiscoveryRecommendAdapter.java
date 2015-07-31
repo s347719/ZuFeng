@@ -1,16 +1,16 @@
 package com.shuhuan.zufeng.app.adapters;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import com.shuhuan.zufeng.app.R;
 import com.shuhuan.zufeng.app.model.DiscoveryRecommend;
 import com.shuhuan.zufeng.app.model.discoveryrecommend.*;
+import com.shuhuan.zufeng.app.tasks.ImageLoadTask;
 
 import java.util.List;
 
@@ -31,9 +31,6 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
 
 
-    /**
-     * 从接口获取的discover recomend内容，完整的推荐
-     */
     private View.OnClickListener onClickListener;
 
 
@@ -42,7 +39,6 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
     }
 
 
-    private Context context;
     /**
      * 从接口获取的  discover recommend 内容，完整的推荐
      */
@@ -50,6 +46,10 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
 
 
+    /**
+     * 从接口获取的discover recomend内容，完整的推荐
+     */
+    private Context context;
     public DiscoveryRecommendAdapter(Context context) {
         this.context = context;
     }
@@ -126,6 +126,7 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         }else {
             ret = 3;
         }
+
         return ret;
     }
 
@@ -183,7 +184,7 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
     /**
      *
-     *              热门推荐
+     *     热门推荐
      *
      *
      *
@@ -255,21 +256,51 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
                 }
                 for (int j = 0; j < size; j++) {
                     ViewGroup block = holder.blocks[j];
-                    ImageButton imageButton = (ImageButton) block.getChildAt(0);
-                    imageButton.setOnClickListener(onClickListener);
+                    ImageButton img = (ImageButton) block.getChildAt(0);
+                    HotRecommendList hotRecommendList = listHotRecommend.get(j);
+                    String coverLarge = hotRecommendList.getCoverLarge();
+                    boolean needLoad = true;
+                    //设置图片加载中显示
+                    Object tag = img.getTag();
+                    if (tag != null) {
+
+                        if (tag instanceof String)
+                        {
+                            String s = (String) tag;
+                            if (s.equals(coverLarge))
+                            {
+                                needLoad = false;
+                            }
+                        }
+                    }
+                    if (needLoad) {
+                        // 在加载图片之前给设置一张默认图片 用来消除之前缓存的图片
+                        img.setImageResource(R.mipmap.ic_launcher);
+                    }
+                    img.setOnClickListener(onClickListener);
                     TextView blockTitle = (TextView) block.getChildAt(1);
                     //TODO 加载图片
-                    HotRecommendList hotRecommendList = listHotRecommend.get(j);
                     blockTitle.setText(hotRecommendList.getTrackTitle());
+
+                    img.setTag(coverLarge);
+
+                    if (coverLarge!=null && needLoad)
+                    {
+                        ImageLoadTask task = new ImageLoadTask(img);
+                        // 手机版本的适配
+                        if (Build.VERSION.SDK_INT>=11) {
+                            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, coverLarge);
+                        }
+                        else
+                        {
+                            task.execute(coverLarge);
+                        }
+                    }
 
                 }
             }
 
         }
-
-
-
-
 
         return ret;
     }
@@ -372,18 +403,41 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
             for (int i = 0; i < size; i++) {
                 AlbumList albumList = list.get(i);
                 String coverLarge = albumList.getCoverLarge();
+
                 String title1 = albumList.getTitle();
+                ImageView imageView =null;
+
                 switch (i)
                 {
                     case 0:
                         holder.block0TextView.setText(title1);
+                        imageView = holder.block0ImageButton;
                         break;
                     case 1:
                         holder.block1TextView.setText(title1);
+                        imageView = holder.block1ImageButton;
                         break;
                     case 2:
                         holder.block2TextView.setText(title1);
+                        imageView = holder.block2ImageButton;
                         break;
+                }
+                if (imageView!=null && coverLarge !=null)
+                {
+                    imageView.setImageResource(R.mipmap.ic_launcher);
+
+                    imageView.setTag(coverLarge);
+
+                    ImageLoadTask task = new ImageLoadTask(imageView);
+
+                    // 手机版本的适配
+                    if (Build.VERSION.SDK_INT>=11) {
+                        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, coverLarge);
+                    }
+                    else
+                    {
+                        task.execute(coverLarge);
+                    }
                 }
             }
         }
