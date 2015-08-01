@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+import com.shuhuan.zufeng.app.cache.FileCache;
 import com.shuhuan.zufeng.app.client.HttpUtil;
 
 /**
@@ -40,7 +41,13 @@ private String url;
         if (params!=null && params.length>0)
         {
             url = params[0];
-            byte[] data = HttpUtil.doGet(url);
+
+            byte[] data = FileCache.getInstance().loadFile(url);
+            if (data == null) {
+                data = HttpUtil.doGet(url);
+                // 文件缓存
+                 FileCache.getInstance().saveFile(url,data);
+            }
             // 1, 文件缓存
             // 2  图片二次采样
             // 3，图片的内存缓存
@@ -51,7 +58,7 @@ private String url;
 
                ret = BitmapFactory.decodeByteArray(data,0,data.length);
 
-
+                data = null;
             }
         }
 

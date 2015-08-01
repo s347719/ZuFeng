@@ -31,6 +31,7 @@
 
     排列顺序
          焦点图----------- focusImages
+
          小编推荐-----------editorRecommendAlbums
          精品听单 ------------specialColumn
          发现新奇---------------discoveryColumns

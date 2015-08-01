@@ -1,7 +1,5 @@
 package com.shuhuan.zufeng.app.fragments.discover;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,20 +11,13 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.shuhuan.zufeng.app.Constants;
 import com.shuhuan.zufeng.app.R;
-import com.shuhuan.zufeng.app.SettingsActivity;
-import com.shuhuan.zufeng.app.Test1Activity;
 import com.shuhuan.zufeng.app.adapters.DiscoveryRecommendAdapter;
 import com.shuhuan.zufeng.app.model.DiscoveryRecommend;
-import com.shuhuan.zufeng.app.model.discoveryrecommend.DiscoveryDiscoveryColumns;
 import com.shuhuan.zufeng.app.parsers.DataParser;
 import com.shuhuan.zufeng.app.tasks.TaskCallback;
 import com.shuhuan.zufeng.app.tasks.TaskResult;
 import com.shuhuan.zufeng.app.tasks.impl.DiscoveryRecommendTask;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created with Intellij IDEA.
@@ -37,7 +28,7 @@ import java.util.List;
  */
 public class DiscoveryRecommendFragment extends Fragment implements AdapterView.OnItemClickListener, TaskCallback {
 
-
+    private DiscoveryRecommendAdapter adapter;
     public DiscoveryRecommendFragment() {
     }
 
@@ -52,19 +43,24 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
             //TODO  设置实际数据的  Adapter
         ////////////////////////////////
 
-            DiscoveryRecommendAdapter adapter = new DiscoveryRecommendAdapter(getActivity());
+            adapter = new DiscoveryRecommendAdapter(getActivity());
             listView.setAdapter(adapter);
 
-            listView.setOnItemClickListener(this);
         }
 
-        DiscoveryRecommendTask task = new DiscoveryRecommendTask(this);
 
-        task.execute();
 
         return ret;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        DiscoveryRecommendTask task =
+                new DiscoveryRecommendTask(this);
+        task.execute();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,6 +96,7 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
 
     @Override
     public void onTaskFinished(TaskResult result) {
+
         if (result != null) {
             int taskId = result.taskId;
             Object data = result.data;
@@ -111,11 +108,13 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
                 {
                     if (data instanceof JSONObject)
                     {
-                        JSONObject jsonObject = (JSONObject) data;
-                        DiscoveryRecommend discoveryRecommend = DataParser.parseDiscoveryRecommend(jsonObject);
+                        JSONObject json = (JSONObject) data;
+                        Log.i("----00--------", "000000000000");
+                        DiscoveryRecommend discoveryRecommend = DataParser.parseDiscoveryRecommend(json);
+                        Log.i("TAGonTask--------", discoveryRecommend.getEditorRecommendAlbums().toString());
 
-                        Log.i("--------",discoveryRecommend.toString());
-
+                        adapter.setRecommend(discoveryRecommend);
+//   Log的结果是 getHotRecommends 的数据没解析完
                     }
                 }
             }

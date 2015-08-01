@@ -23,7 +23,7 @@ import java.util.List;
  "count": 822,
  "hasMore": true,
  */
-public class HotRecommendFirstList {
+public class HotRecommend {
 
     private String title;
     private String contentType;
@@ -31,27 +31,32 @@ public class HotRecommendFirstList {
     private int categoryId;
     private int count;
     private boolean hasMore;
-    private List<HotRecommendList> list;
+    private List<AlbumRecommend> list;
 
     public void parseJson(JSONObject json) throws JSONException {
         title = json.getString("title");
         contentType = json.getString("contentType");
         isFinished = json.getBoolean("isFinished");
-        categoryId = json.getInt("categoryId");
-        count = json.getInt("count");
+        categoryId = json.optInt("categoryId");
+        count = json.optInt("count");
         hasMore = json.getBoolean("hasMore");
 
         JSONArray array = json.getJSONArray("list");
+        if (array != null) {
+            int len = array.length();
+            if (len>0)
+            {
+                list = new LinkedList<AlbumRecommend>();
+                for (int i = 0; i < len; i++) {
 
-        list = new LinkedList<HotRecommendList>();
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject jsonObject = array.getJSONObject(i);
-            HotRecommendList hotRecommendList = new HotRecommendList();
-            hotRecommendList.parseJson(jsonObject);
-            list.add(hotRecommendList);
+                    JSONObject object = array.getJSONObject(i);
+                    AlbumRecommend recommend = new AlbumRecommend();
+                    recommend.parseJson(object);
+                    list.add(recommend);
+                }
+
+            }
         }
-
-
 
     }
     public String getTitle() {
@@ -102,17 +107,17 @@ public class HotRecommendFirstList {
         this.hasMore = hasMore;
     }
 
-    public List<HotRecommendList> getList() {
+    public List<AlbumRecommend> getList() {
         return list;
     }
 
-    public void setList(List<HotRecommendList> list) {
+    public void setList(List<AlbumRecommend> list) {
         this.list = list;
     }
 
     @Override
     public String toString() {
-        return "HotRecommendFirstList{" +
+        return "HotRecommend{" +
                 "title='" + title + '\'' +
                 ", contentType='" + contentType + '\'' +
                 ", isFinished=" + isFinished +

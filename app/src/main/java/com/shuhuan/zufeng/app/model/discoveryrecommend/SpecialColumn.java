@@ -1,5 +1,10 @@
 package com.shuhuan.zufeng.app.model.discoveryrecommend;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,12 +14,38 @@ import java.util.List;
  * Email:578076417@qq.com
  * Created on 2015/7/30.
  */
-public class DiscoverySpecialColumn {
+public class SpecialColumn {
 
     private int ret;
     private String title;
     private boolean hasMore;
     private List<SpecialList> list;
+
+
+    public void parseJSON(JSONObject object) throws JSONException {
+
+        if (object != null) {
+            title = object.getString("title");
+            hasMore = object.getBoolean("hasMore");
+            JSONArray array = object.getJSONArray("list");
+            if (array != null) {
+                int len  = array.length();
+                if (len>0)
+                {
+                    list = new LinkedList<SpecialList>();
+                    for (int i = 0; i < len; i++) {
+                        JSONObject jsonObject = array.getJSONObject(i);
+                        SpecialList specialList = new SpecialList();
+                        specialList.parseJson(jsonObject);
+                        list.add(specialList);
+                    }
+                }
+            }
+
+
+        }
+    }
+
 
 
     public int getRet() {
@@ -51,11 +82,13 @@ public class DiscoverySpecialColumn {
 
     @Override
     public String toString() {
-        return "DiscoverySpecialColumn{" +
+        return "SpecialColumn{" +
                 "ret=" + ret +
                 ", title='" + title + '\'' +
                 ", hasMore=" + hasMore +
                 ", list=" + list +
                 '}';
     }
+
+
 }

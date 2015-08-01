@@ -1,5 +1,6 @@
 package com.shuhuan.zufeng.app.model.discoveryrecommend;
 
+import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,7 +11,7 @@ import org.json.JSONObject;
  * Email:578076417@qq.com
  * Created on 2015/7/30.
  */
-public class HotRecommendList {
+public class AlbumRecommend {
 
 
     /**
@@ -24,17 +25,25 @@ public class HotRecommendList {
      * trackTitle : “电梯吃人”事故,谁来负责？
      * tags : 东广新闻台
      */
-    private int trackId;
     private int albumId;
-    private int playsCounts;
+
     private String coverLarge;
+
     private String title;
-    private int isFinished;
-    private int tracks;
-    private String trackTitle;
+
     private String tags;
 
+    private int tracks;
+
+    private int playsCounts;
+
+    private int isFinished;
+
+    private int trackId;
+
+    private String trackTitle;
     public void parseJson(JSONObject json) throws JSONException {
+        Log.i("---小编推荐底层","---");
         trackId = json.getInt("trackId");
         albumId = json.getInt("albumId");
         playsCounts = json.getInt("playsCounts");
@@ -47,91 +56,90 @@ public class HotRecommendList {
     }
 
 
-
-    public void setTrackId(int trackId) {
-        this.trackId = trackId;
+    public int getAlbumId() {
+        return albumId;
     }
 
     public void setAlbumId(int albumId) {
         this.albumId = albumId;
     }
 
-    public void setPlaysCounts(int playsCounts) {
-        this.playsCounts = playsCounts;
+    public String getCoverLarge() {
+        return coverLarge;
     }
 
     public void setCoverLarge(String coverLarge) {
         this.coverLarge = coverLarge;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setIsFinished(int isFinished) {
-        this.isFinished = isFinished;
-    }
-
-    public void setTracks(int tracks) {
-        this.tracks = tracks;
-    }
-
-    public void setTrackTitle(String trackTitle) {
-        this.trackTitle = trackTitle;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
-    public int getTrackId() {
-        return trackId;
-    }
-
-    public int getAlbumId() {
-        return albumId;
-    }
-
-    public int getPlaysCounts() {
-        return playsCounts;
-    }
-
-    public String getCoverLarge() {
-        return coverLarge;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public int getIsFinished() {
-        return isFinished;
-    }
-
-    public int getTracks() {
-        return tracks;
-    }
-
-    public String getTrackTitle() {
-        return trackTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTags() {
         return tags;
     }
 
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public int getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(int tracks) {
+        this.tracks = tracks;
+    }
+
+    public int getPlaysCounts() {
+        return playsCounts;
+    }
+
+    public void setPlaysCounts(int playsCounts) {
+        this.playsCounts = playsCounts;
+    }
+
+    public int getIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(int isFinished) {
+        this.isFinished = isFinished;
+    }
+
+    public int getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(int trackId) {
+        this.trackId = trackId;
+    }
+
+    public String getTrackTitle() {
+        return trackTitle;
+    }
+
+    public void setTrackTitle(String trackTitle) {
+        this.trackTitle = trackTitle;
+    }
+
     @Override
     public String toString() {
-        return "HotRecommendList{" +
-                "trackId=" + trackId +
-                ", albumId=" + albumId +
-                ", playsCounts=" + playsCounts +
+        return "AlbumRecommend{" +
+                "albumId=" + albumId +
                 ", coverLarge='" + coverLarge + '\'' +
                 ", title='" + title + '\'' +
-                ", isFinished=" + isFinished +
-                ", tracks=" + tracks +
-                ", trackTitle='" + trackTitle + '\'' +
                 ", tags='" + tags + '\'' +
+                ", tracks=" + tracks +
+                ", playsCounts=" + playsCounts +
+                ", isFinished=" + isFinished +
+                ", trackId=" + trackId +
+                ", trackTitle='" + trackTitle + '\'' +
                 '}';
     }
 }

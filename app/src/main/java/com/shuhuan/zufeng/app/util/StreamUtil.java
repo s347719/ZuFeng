@@ -55,22 +55,21 @@ public class StreamUtil {
      */
     public static byte[] readStream(InputStream in) throws IOException {
         byte[] ret = null;
-        if (in != null) {
 
-            byte[] buf = new byte[1024];
-            int len;
+        if (in != null) {
+            byte[] buf = new byte[128];
+            int len = 0;
             ByteArrayOutputStream bout = null;
             bout = new ByteArrayOutputStream();
-            while (true)
-            {
-                len = in.read(buf);
-                if (len != -1) {
-                    bout.write(buf,0,len);
-                }
-                break;
+
+            while ((len = in.read(buf)) != -1) {
+                bout.write(buf, 0, len);
             }
-           ret = bout.toByteArray();
+            buf = null;
+            ret = bout.toByteArray();
+            bout.close();
         }
+
         return ret;
 
     }

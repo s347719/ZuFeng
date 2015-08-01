@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import com.shuhuan.zufeng.app.model.CategoryTagMenu;
 import com.shuhuan.zufeng.app.parsers.DataParser;
@@ -63,6 +64,9 @@ public class SplashActivity extends FragmentActivity implements TaskCallback {
                 if (data instanceof JSONObject)
                 {
                     JSONObject json= (JSONObject)data;
+
+                    Log.d("SplashActivity", "json " + json.toString());
+
                     List<CategoryTagMenu> categoryTagMenus =
                             DataParser.parseCategoryTagMenu(json);
 

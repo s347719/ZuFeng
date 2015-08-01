@@ -14,15 +14,17 @@ public class FocusImage {
 
 
     /**
-     * uid : 30495264
-     * is_External_url : false
-     * isShare : false
-     * albumId : 2814299
-     * id : 3597
-     * shortTitle : 中国每天2亿人乘电梯，安全吗？
-     * pic : http://fdfs.xmcdn.com/group15/M06/52/77/wKgDaFW16vfD9nFSAAHBRSk6xm4459_android_large.jpg
-     * type : 2
-     * longTitle : 中国每天2亿人乘电梯，安全吗？
+     *
+     *
+     * "id": 3597,
+     "shortTitle": "中国每天2亿人乘电梯，安全吗？",
+     "longTitle": "中国每天2亿人乘电梯，安全吗？",
+     "pic": "http://fdfs.xmcdn.com/group15/M06/52/77/wKgDaFW16vfD9nFSAAHBRSk6xm4459_android_large.jpg",
+     "type": 2,
+     "uid": 30495264,
+     "albumId": 2814299,
+     "isShare": false,
+     "is_External_url": false
      */
     private int uid;
     private boolean is_External_url;
@@ -38,10 +40,10 @@ public class FocusImage {
 
     public void parseJson(JSONObject json) throws JSONException {
 
-        uid = json.getInt("uid");
+        uid = json.optInt("uid");
         is_External_url = json.getBoolean("is_External_url");
         isShare = json.getBoolean("isShare");
-        albumId = json.getInt("albumId");
+        albumId = json.optInt("albumId");
         id  =json.getInt("id");
         shortTitle = json.getString("shortTitle");
         pic = json.getString("pic");

@@ -8,6 +8,8 @@ package com.shuhuan.zufeng.app.client;
  * Created on 2015/7/28.
  */
 
+
+
 import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
@@ -26,9 +28,18 @@ public class ClientDiscoveryAPI {
 
 
     /**
+     * 获取 发现 －》 推荐的内容<br/>
+     * 调用接口: http://mobile.ximalaya.com/mobile/discovery/v1/recommends
+     * 参数: <br/>
+     * <ul>
+     * <li>channel=and-f6</li>
+     * <li>device=android</li>
+     * <li>includeActivity=true</li>
+     * <li>includeSpecial=true</li>
+     * <li>scale=2</li>
+     * <li>version=4.1.7.1</li>
+     * </ul>
      *
-     * 获取recommend 中的数据
-     *http://mobile.ximalaya.com/mobile/discovery/v1/recommends?channel=and-f6&device=android&includeActivity=true&includeSpecial=true&scale=2&version=4.1.7.1
      * @return
      */
     public static String getDiscoveryRecommend() {
@@ -46,11 +57,14 @@ public class ClientDiscoveryAPI {
 
         if (bytes != null) {
             try {
+
                 ret = new String(bytes,"UTF-8");
+                Log.i("------经过UTF-8---------",ret);
             } catch (UnsupportedEncodingException e) {
                 ret = new String(bytes);
             }
         }
+
 
         return ret;
 
@@ -67,7 +81,7 @@ public class ClientDiscoveryAPI {
         String ret = null;
         String url = SERVER_MOBILE +"/mobile/discovery/v1/tabs?device=android";
 
-        Log.i("---------","url="+url);
+//        Log.i("---------","url="+url);
 
         byte[] bytes = HttpUtil.doGet(url);
         if (bytes != null) {
@@ -78,7 +92,7 @@ public class ClientDiscoveryAPI {
                 ret = new String (bytes);
             }
         }
-        Log.i("------------","ret=" + ret);
+//        Log.i("------------","ret=" + ret);
         return ret;
     }
 

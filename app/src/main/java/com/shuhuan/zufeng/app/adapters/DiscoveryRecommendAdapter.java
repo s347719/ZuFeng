@@ -3,6 +3,7 @@ package com.shuhuan.zufeng.app.adapters;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,38 +32,38 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
 
 
-    private View.OnClickListener onClickListener;
-
-
-    public void setOnClickListener(View.OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
-
-    /**
-     * 从接口获取的  discover recommend 内容，完整的推荐
-     */
-    private DiscoveryRecommend recommend;
-
-
-
     /**
      * 从接口获取的discover recomend内容，完整的推荐
      */
     private Context context;
+
+
+    private View.OnClickListener onClickListener;
+
+
+
+
     public DiscoveryRecommendAdapter(Context context) {
         this.context = context;
     }
+    /**
+     * 从接口获取的  discover recommend 内容，完整的推荐
+     */
+    private DiscoveryRecommend recommend;
 
     /**
      * 设置的数数据<br/>
      * 这个方法在主线程调用更新
      * @param recommend
      */
-    public void recommend(DiscoveryRecommend recommend) {
+    public void setRecommend(DiscoveryRecommend recommend) {
         this.recommend = recommend;
         notifyDataSetChanged();
     }
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
 
     @Override
     public int getCount() {
@@ -70,16 +71,19 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         if (recommend != null) {
             // 3  是 小编推荐  精品听单  发现新奇
             int hotCount = 0;
-            DiscoveryHotRecommends discoveryHotRecommends = new DiscoveryHotRecommends();
-            if (discoveryHotRecommends != null) {
-                List<HotRecommendFirstList> list = discoveryHotRecommends.getList();
+            HotRecommends hotRecommends = recommend.getHotRecommends();
+            if (hotRecommends != null) {
+                // 热门推荐 子分类
+                List<HotRecommend> list = hotRecommends.getList();
                 if (list != null) {
+
                     hotCount = list.size();
                 }
             }
+
             ret = 3 +hotCount;
         }
-
+        Log.d("--------", "ret = " + ret);
         return ret;
     }
 
@@ -90,16 +94,16 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         switch (position)
         {
             case 0:
-                ret = recommend.getDiscoveryHotRecommends();
+                ret = recommend.getEditorRecommendAlbums();
                 break;
             case 1:
-                ret = recommend.getDiscoverySpecialColumn();
+                ret = recommend.getSpecialColumn();
                 break;
             case 2:
-                ret = recommend.getDiscoveryDiscoveryColumns();
+                ret = recommend.getDiscoverColumns();
                 break;
             default:
-                DiscoveryHotRecommends hotRecommends=recommend.getDiscoveryHotRecommends();
+                HotRecommends hotRecommends=recommend.getHotRecommends();
                 if (hotRecommends != null) {
                     ret = hotRecommends.getList().get(position-3);
                 }
@@ -117,13 +121,13 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
     public int getItemViewType(int position) {
         int ret = 0;
         Object item = getItem(position);
-        if (item instanceof DiscoveryEditorRecommendAlbums){
+        if (item instanceof EditorRecommendAlbums){
             ret = 0;
-        }else if (item instanceof DiscoverySpecialColumn){
+        }else if (item instanceof SpecialColumn){
             ret = 1;
-        }else if (item instanceof DiscoveryDiscoveryColumns){
+        }else if (item instanceof DiscoverColumns){
             ret = 2;
-        }else {
+        }else if(item instanceof HotRecommends){
             ret = 3;
         }
 
@@ -134,7 +138,7 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -143,7 +147,7 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         Object item = getItem(position);
 
         int itemViewType = getItemViewType(position);
-
+        Log.i("------","itemViewType = " + itemViewType);
         switch (itemViewType)
         {
             case 0:
@@ -168,6 +172,28 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
     }
 
 
+
+
+
+    /**
+     *
+     * 精品听单
+     *
+     *
+     * 热门推荐
+     * @param item
+     * @param convertView
+     * @param parent
+     * @return
+     */
+    private View bindSpecialColumn(Object item, View convertView, ViewGroup parent) {
+
+        View ret= null;
+
+
+        return ret;
+
+    }
     /**
      * 发现新奇
      * @param item
@@ -181,6 +207,9 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         return ret;
 
     }
+
+
+
 
     /**
      *
@@ -225,106 +254,90 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
         /////////////////////////////////
 
-        DiscoveryHotRecommends hot = (DiscoveryHotRecommends) item;
+        HotRecommend hot = (HotRecommend) item;
 
-        List<HotRecommendFirstList> list = hot.getList();
-        for (int i = 0; i < list.size(); i++) {
+        String title = hot.getTitle();
+        holder.txtTitle.setText(title);
 
-            HotRecommendFirstList hotRecommendFirstList = list.get(i);
+        boolean hasMore = hot.isHasMore();
 
-            String title3 = hotRecommendFirstList.getTitle();
-            boolean hasMore = hotRecommendFirstList.isHasMore();
-            hot.setTitle(title3);
-            if (hasMore)
-            {
-                holder.txtMore.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                holder.txtMore.setVisibility(View.INVISIBLE);
-            }
-
-
-            List<HotRecommendList> listHotRecommend = hotRecommendFirstList.getList();
-
-            if (listHotRecommend != null) {
-
-                int size = listHotRecommend.size();
-                if (size>3)
-                {
-                    size =3;
-                }
-                for (int j = 0; j < size; j++) {
-                    ViewGroup block = holder.blocks[j];
-                    ImageButton img = (ImageButton) block.getChildAt(0);
-                    HotRecommendList hotRecommendList = listHotRecommend.get(j);
-                    String coverLarge = hotRecommendList.getCoverLarge();
-                    boolean needLoad = true;
-                    //设置图片加载中显示
-                    Object tag = img.getTag();
-                    if (tag != null) {
-
-                        if (tag instanceof String)
-                        {
-                            String s = (String) tag;
-                            if (s.equals(coverLarge))
-                            {
-                                needLoad = false;
-                            }
-                        }
-                    }
-                    if (needLoad) {
-                        // 在加载图片之前给设置一张默认图片 用来消除之前缓存的图片
-                        img.setImageResource(R.mipmap.ic_launcher);
-                    }
-                    img.setOnClickListener(onClickListener);
-                    TextView blockTitle = (TextView) block.getChildAt(1);
-                    //TODO 加载图片
-                    blockTitle.setText(hotRecommendList.getTrackTitle());
-
-                    img.setTag(coverLarge);
-
-                    if (coverLarge!=null && needLoad)
-                    {
-                        ImageLoadTask task = new ImageLoadTask(img);
-                        // 手机版本的适配
-                        if (Build.VERSION.SDK_INT>=11) {
-                            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, coverLarge);
-                        }
-                        else
-                        {
-                            task.execute(coverLarge);
-                        }
-                    }
-
-                }
-            }
-
+        if (hasMore) {
+            holder.txtMore.setVisibility(View.VISIBLE);
+        } else {
+            holder.txtMore.setVisibility(View.INVISIBLE);
         }
 
+        ///////////////////////////
+        // 水平的图片
+
+        List<AlbumRecommend> list = hot.getList();
+
+        if (list != null) {
+
+            int size = list.size();
+
+            if (size > 3) {
+                size = 3;
+            }
+
+            for (int i = 0; i < size; i++) {
+                ViewGroup block = holder.blocks[i];
+
+                ImageButton img = (ImageButton) block.getChildAt(0);
+
+                AlbumRecommend recommend = list.get(i);
+
+                // 网址
+                String coverLarge = recommend.getCoverLarge();
+
+                boolean needLoad = true;
+                Object tag = img.getTag();
+                if (tag != null) {
+                    if(tag instanceof String){
+                        String s = (String) tag;
+                        if(s.equals(coverLarge)){
+                            needLoad = false;
+                        }
+                    }
+                }
+                if(needLoad) {
+                    // 设置“图片加载中”显示
+                    img.setImageResource(R.mipmap.ic_launcher);
+                }
+
+                img.setOnClickListener(onClickListener);
+
+                TextView blockTitle = (TextView) block.getChildAt(1);
+
+                // TODO 加载图片
+                blockTitle.setText(recommend.getTrackTitle());
+
+                // 用于在异步任务中，进行图片下载地址的识别，避免错位
+                img.setTag(coverLarge);
+
+                if (coverLarge != null && needLoad) {
+
+                    ImageLoadTask task = new ImageLoadTask(img);
+
+                    // 手机版本的适配
+                    if (Build.VERSION.SDK_INT >= 11) {
+                        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, coverLarge);
+                    } else {
+                        task.execute(coverLarge);
+                    }
+                }
+
+
+            }
+        }
+
+
+
         return ret;
     }
 
 
 
-    /**
-     *
-     * 精品听单
-     *
-     *
-     * 热门推荐
-     * @param item
-     * @param convertView
-     * @param parent
-     * @return
-     */
-    private View bindSpecialColumn(Object item, View convertView, ViewGroup parent) {
-
-        View ret= null;
-
-        return ret;
-
-    }
 
 
     /**
@@ -374,12 +387,14 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
             ret.setTag(holder);
         }
 
-        DiscoveryEditorRecommendAlbums albums = (DiscoveryEditorRecommendAlbums) item;
+        EditorRecommendAlbums albums = (EditorRecommendAlbums) item;
 
         String title = albums.getTitle();
         holder.txtTitle.setText(title);
 
         boolean hasMore = albums.isHasMore();
+
+        /////////////////////////////////
         if (hasMore)
         {
             holder.txtMore.setVisibility(View.VISIBLE);
@@ -390,7 +405,7 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
         /////////////////////////////////////////
 
-        List<AlbumList> list = albums.getList();
+        List<AlbumRecommend> list = albums.getList();
 
         if (list != null) {
 
@@ -401,24 +416,25 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
                 size=3;
             }
             for (int i = 0; i < size; i++) {
-                AlbumList albumList = list.get(i);
-                String coverLarge = albumList.getCoverLarge();
+                AlbumRecommend recommend = list.get(i);
 
-                String title1 = albumList.getTitle();
+                String coverLarge = recommend.getCoverLarge();
+
+                String tit = recommend.getTrackTitle();
                 ImageView imageView =null;
 
                 switch (i)
                 {
                     case 0:
-                        holder.block0TextView.setText(title1);
+                        holder.block0TextView.setText(tit);
                         imageView = holder.block0ImageButton;
                         break;
                     case 1:
-                        holder.block1TextView.setText(title1);
+                        holder.block1TextView.setText(tit);
                         imageView = holder.block1ImageButton;
                         break;
                     case 2:
-                        holder.block2TextView.setText(title1);
+                        holder.block2TextView.setText(tit);
                         imageView = holder.block2ImageButton;
                         break;
                 }

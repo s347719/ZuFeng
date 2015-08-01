@@ -1,5 +1,6 @@
 package com.shuhuan.zufeng.app.tasks.impl;
 
+import android.util.Log;
 import com.shuhuan.zufeng.app.Constants;
 import com.shuhuan.zufeng.app.client.ClientDiscoveryAPI;
 import com.shuhuan.zufeng.app.tasks.BaseTask;
@@ -29,6 +30,7 @@ public class DiscoveryRecommendTask extends BaseTask {
         String str = ClientDiscoveryAPI.getDiscoveryRecommend();
         if (str != null) {
             try {
+                Log.i("-----联网下载的字符串-----",str);
                 ret.data = new JSONObject(str);
             } catch (JSONException e) {
                 e.printStackTrace();
