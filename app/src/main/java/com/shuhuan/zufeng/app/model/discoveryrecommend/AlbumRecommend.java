@@ -14,17 +14,7 @@ import org.json.JSONObject;
 public class AlbumRecommend {
 
 
-    /**
-     * trackId : 7991015
-     * albumId : 343042
-     * playsCounts : 100781
-     * coverLarge : http://fdfs.xmcdn.com/group6/M0A/E0/7E/wKgDhFUc5qbjBmDbAAAps8N-LbI468_mobile_large.jpg
-     * title : 重点关注
-     * isFinished : 0
-     * tracks : 572
-     * trackTitle : “电梯吃人”事故,谁来负责？
-     * tags : 东广新闻台
-     */
+
     private int albumId;
 
     private String coverLarge;
@@ -43,7 +33,7 @@ public class AlbumRecommend {
 
     private String trackTitle;
     public void parseJson(JSONObject json) throws JSONException {
-        Log.i("---小编推荐底层","---");
+//        Log.i("---小编推荐底层","---");
         trackId = json.getInt("trackId");
         albumId = json.getInt("albumId");
         playsCounts = json.getInt("playsCounts");

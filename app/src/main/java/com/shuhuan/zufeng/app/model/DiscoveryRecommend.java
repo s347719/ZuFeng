@@ -23,7 +23,7 @@ public class DiscoveryRecommend {
 
 
     public void parseJSON(JSONObject json) {
-        Log.i("----1111----","222222");
+//        Log.i("----1111----","222222");
         if (json != null) {
             try {
 

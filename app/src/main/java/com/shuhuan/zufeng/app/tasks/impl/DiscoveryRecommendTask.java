@@ -30,7 +30,7 @@ public class DiscoveryRecommendTask extends BaseTask {
         String str = ClientDiscoveryAPI.getDiscoveryRecommend();
         if (str != null) {
             try {
-                Log.i("-----联网下载的字符串-----",str);
+//                Log.i("-----联网下载的字符串-----",str);
                 ret.data = new JSONObject(str);
             } catch (JSONException e) {
                 e.printStackTrace();

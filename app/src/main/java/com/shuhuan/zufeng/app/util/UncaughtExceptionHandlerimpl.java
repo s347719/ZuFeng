@@ -46,11 +46,11 @@ public class UncaughtExceptionHandlerimpl implements Thread.UncaughtExceptionHan
 
             File filesDir =context.getFilesDir();
 
-            String state  = Environment.getExternalStorageState();
-            if (state.equals(Environment.MEDIA_MOUNTED))
-            {
-                filesDir = context.getExternalFilesDir(null);
-            }
+//            String state  = Environment.getExternalStorageState();
+//            if (state.equals(Environment.MEDIA_MOUNTED))
+//            {
+//                filesDir = context.getExternalFilesDir(null);
+//            }
             File logFile = new File(filesDir,"app.log");
 
             FileWriter fw = null;

@@ -41,7 +41,7 @@ public final class HttpUtil {
     public static byte[] doGet(String url)
     {
 
-        Log.d("===请求的网址===",url);
+//        Log.d("===请求的网址===",url);
         byte[] ret = null;
         if (url != null) {
             // 注意释放连接
@@ -73,7 +73,7 @@ public final class HttpUtil {
                 //取出状态码
                 int code = conn.getResponseCode();
 
-                Log.i("-----联网请求返回码----","code=" + code);
+//                Log.i("-----联网请求返回码----","code=" + code);
 
                 if (code ==200)
                 {

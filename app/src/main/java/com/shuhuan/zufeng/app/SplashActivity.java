@@ -43,7 +43,7 @@ public class SplashActivity extends FragmentActivity implements TaskCallback {
 
         super.onResume();
 
-        MyLog.d("Splash","3/0");
+//        MyLog.d("Splash","3/0");
 
         //启动扉页,进行网络检查
         //下载数据，最终显示主界面
@@ -65,7 +65,7 @@ public class SplashActivity extends FragmentActivity implements TaskCallback {
                 {
                     JSONObject json= (JSONObject)data;
 
-                    Log.d("SplashActivity", "json " + json.toString());
+//                    Log.d("SplashActivity", "json " + json.toString());
 
                     List<CategoryTagMenu> categoryTagMenus =
                             DataParser.parseCategoryTagMenu(json);

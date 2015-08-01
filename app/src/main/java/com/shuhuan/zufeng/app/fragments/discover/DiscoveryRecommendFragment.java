@@ -17,6 +17,7 @@ import com.shuhuan.zufeng.app.parsers.DataParser;
 import com.shuhuan.zufeng.app.tasks.TaskCallback;
 import com.shuhuan.zufeng.app.tasks.TaskResult;
 import com.shuhuan.zufeng.app.tasks.impl.DiscoveryRecommendTask;
+import com.shuhuan.zufeng.app.util.UncaughtExceptionHandlerimpl;
 import org.json.JSONObject;
 
 /**
@@ -26,7 +27,7 @@ import org.json.JSONObject;
  * Email:578076417@qq.com
  * Created on 2015/7/29.
  */
-public class DiscoveryRecommendFragment extends Fragment implements AdapterView.OnItemClickListener, TaskCallback {
+public class DiscoveryRecommendFragment extends Fragment implements AdapterView.OnItemClickListener, TaskCallback, View.OnClickListener {
 
     private DiscoveryRecommendAdapter adapter;
     public DiscoveryRecommendFragment() {
@@ -43,7 +44,12 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
             //TODO  设置实际数据的  Adapter
         ////////////////////////////////
 
+            Thread.UncaughtExceptionHandler handler =
+                    new UncaughtExceptionHandlerimpl(getActivity().getApplicationContext());
+            Thread.setDefaultUncaughtExceptionHandler(handler);
+
             adapter = new DiscoveryRecommendAdapter(getActivity());
+            adapter.setOnClickListener(this);
             listView.setAdapter(adapter);
 
         }
@@ -109,12 +115,9 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
                     if (data instanceof JSONObject)
                     {
                         JSONObject json = (JSONObject) data;
-                        Log.i("----00--------", "000000000000");
                         DiscoveryRecommend discoveryRecommend = DataParser.parseDiscoveryRecommend(json);
-                        Log.i("TAGonTask--------", discoveryRecommend.getEditorRecommendAlbums().toString());
 
                         adapter.setRecommend(discoveryRecommend);
-//   Log的结果是 getHotRecommends 的数据没解析完
                     }
                 }
             }
@@ -123,5 +126,47 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
 
 
 
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        int id = v.getId();
+        Object tag = v.getTag();
+
+        if (id == R.id.item_recommend_album_more)
+        {
+            //进入更多页面
+             String s = (String) tag;
+            if (Constants.TAG_DISCOVERY_EDITOR.equals(tag))
+            {
+                Toast.makeText(getActivity(), "点了小编推荐", Toast.LENGTH_SHORT).show();
+            } else if (s.startsWith(Constants.TAG_DISCOVERY_RECOMMEND_HOT))
+            {
+
+                int index = s.indexOf(':');
+                s = s.substring(index + 1);
+                int cid = Integer.parseInt(s);
+            }
+        }
+
+        else if (v instanceof ImageView)
+        {
+            // TODO  如果是图片，相当于点击了专辑，跳转专辑列表
+            if (tag != null){
+                if (tag instanceof String[]){
+                    String[] ss = (String[]) tag;
+                    if (ss.length > 2){
+                        String albumId = ss[1];
+                        String trackId = ss[2];
+                        //TODO 调用接口20
+                        Log.i("---------","albumId"+albumId);
+                        Log.i("---------","trackId"+trackId);
+
+                    }
+                }
+            }
+
+        }
     }
 }

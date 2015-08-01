@@ -54,4 +54,8 @@ public class Constants {
      *  教程页上一次加载的版本号
      */
     public static final String SP_KEY_GUIDE_LAST_SHOW_VERSION = "glv";
+
+
+    public static final String TAG_DISCOVERY_EDITOR = "editor";
+    public static final String TAG_DISCOVERY_RECOMMEND_HOT = "hotRecommend:";
 }

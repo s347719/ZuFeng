@@ -25,7 +25,7 @@ public class EditorRecommendAlbums {
     private List<AlbumRecommend> list;
 
     public void parseJSON(JSONObject json) throws JSONException {
-        Log.i("---解析小编推荐----","----");
+//        Log.i("---解析小编推荐----","----");
         if (json != null) {
             title = json.getString("title");
             hasMore = json.optBoolean("hasMore");

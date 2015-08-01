@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.shuhuan.zufeng.app.Constants;
 import com.shuhuan.zufeng.app.R;
 import com.shuhuan.zufeng.app.model.DiscoveryRecommend;
 import com.shuhuan.zufeng.app.model.discoveryrecommend.*;
@@ -29,7 +30,6 @@ import java.util.List;
  */
 
 public class DiscoveryRecommendAdapter extends BaseAdapter {
-
 
 
     /**
@@ -127,7 +127,7 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
             ret = 1;
         }else if (item instanceof DiscoverColumns){
             ret = 2;
-        }else if(item instanceof HotRecommends){
+        }else if(item instanceof HotRecommend){
             ret = 3;
         }
 
@@ -147,7 +147,7 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         Object item = getItem(position);
 
         int itemViewType = getItemViewType(position);
-        Log.i("------","itemViewType = " + itemViewType);
+//        Log.i("------","itemViewType = " + itemViewType);
         switch (itemViewType)
         {
             case 0:
@@ -188,10 +188,10 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
      */
     private View bindSpecialColumn(Object item, View convertView, ViewGroup parent) {
 
-        View ret= null;
+        TextView textView = new TextView(context);
+        textView.setText("1222111");
 
-
-        return ret;
+        return textView;
 
     }
     /**
@@ -203,8 +203,10 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
      */
 
     private View bindDiscoveryColumns(Object item, View convertView, ViewGroup parent) {
-        View ret = null;
-        return ret;
+        TextView textView = new TextView(context);
+        textView.setText("1333111");
+
+        return textView;
 
     }
 
@@ -261,6 +263,10 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
         boolean hasMore = hot.isHasMore();
 
+        //对于热门推荐更多点击的时候，对象中包含了 CategoryId
+        // 通过这个作为点击时间的入口
+        holder.txtMore.setTag(Constants.TAG_DISCOVERY_RECOMMEND_HOT +hot.getCategoryId());
+
         if (hasMore) {
             holder.txtMore.setVisibility(View.VISIBLE);
         } else {
@@ -270,11 +276,11 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         ///////////////////////////
         // 水平的图片
 
-        List<AlbumRecommend> list = hot.getList();
+        List<AlbumRecommend> listHot = hot.getList();
 
-        if (list != null) {
+        if (listHot != null) {
 
-            int size = list.size();
+            int size = listHot.size();
 
             if (size > 3) {
                 size = 3;
@@ -285,7 +291,7 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
                 ImageButton img = (ImageButton) block.getChildAt(0);
 
-                AlbumRecommend recommend = list.get(i);
+                AlbumRecommend recommend = listHot.get(i);
 
                 // 网址
                 String coverLarge = recommend.getCoverLarge();
@@ -297,6 +303,18 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
                         String s = (String) tag;
                         if(s.equals(coverLarge)){
                             needLoad = false;
+                        }
+                    }
+                    else if (tag instanceof String[])
+                    {
+                        String [] ss = (String [])tag;
+                        if (ss.length>0)
+                        {
+                            String s = ss[0];
+                            if (s.equals(coverLarge))
+                            {
+                                needLoad = false;
+                            }
                         }
                     }
                 }
@@ -312,8 +330,19 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
                 // TODO 加载图片
                 blockTitle.setText(recommend.getTrackTitle());
 
+
+
                 // 用于在异步任务中，进行图片下载地址的识别，避免错位
-                img.setTag(coverLarge);
+//                img.setTag(coverLarge);
+
+                //  设置字符串数组的TAG
+                //  索引0  用于 ImageView 图片错位问题
+                //  其他两个，用户 ImageView 点击时间的处理的
+
+                img.setTag(
+                        new String[]{coverLarge,
+                        Integer.toString(recommend.getAlbumId()),
+                        Integer.toString(recommend.getTrackId())});
 
                 if (coverLarge != null && needLoad) {
 
@@ -392,9 +421,9 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         String title = albums.getTitle();
         holder.txtTitle.setText(title);
 
-        boolean hasMore = albums.isHasMore();
-
         /////////////////////////////////
+        boolean hasMore = albums.isHasMore();
+        holder.txtMore.setTag("editor");
         if (hasMore)
         {
             holder.txtMore.setVisibility(View.VISIBLE);
@@ -404,6 +433,8 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         }
 
         /////////////////////////////////////////
+
+//        Log.i("-------@@@@------","@@@@@");
 
         List<AlbumRecommend> list = albums.getList();
 
@@ -457,7 +488,6 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
                 }
             }
         }
-
 
         return ret;
     }

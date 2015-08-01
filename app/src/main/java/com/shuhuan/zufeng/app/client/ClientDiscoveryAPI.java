@@ -59,7 +59,7 @@ public class ClientDiscoveryAPI {
             try {
 
                 ret = new String(bytes,"UTF-8");
-                Log.i("------经过UTF-8---------",ret);
+//                Log.i("------经过UTF-8---------",ret);
             } catch (UnsupportedEncodingException e) {
                 ret = new String(bytes);
             }
