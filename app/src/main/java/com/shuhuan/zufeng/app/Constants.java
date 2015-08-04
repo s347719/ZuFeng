@@ -58,4 +58,11 @@ public class Constants {
 
     public static final String TAG_DISCOVERY_EDITOR = "editor";
     public static final String TAG_DISCOVERY_RECOMMEND_HOT = "hotRecommend:";
+
+    /**
+     *
+     * 点击热门推荐里面的一个任意模块中的一个专辑
+     *
+     */
+    public static final int TASK_DISCOVERY_RECOMMEND_HOTRECOMMEND = 6;
 }

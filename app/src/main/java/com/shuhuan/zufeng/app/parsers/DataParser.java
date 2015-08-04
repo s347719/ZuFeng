@@ -7,6 +7,7 @@ import com.shuhuan.zufeng.app.model.DiscoveryCategory;
 import com.shuhuan.zufeng.app.model.DiscoveryRecommend;
 import com.shuhuan.zufeng.app.model.DiscoveryTab;
 import com.shuhuan.zufeng.app.model.discoveryrecommend.*;
+import com.shuhuan.zufeng.app.model.discoveryrecommend.horecommendclickshow.HotRecommendClickShow;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -151,7 +152,6 @@ public final class DataParser  {
                 int code = json.getInt("ret");
 
                 if (code == 0){
-                    Log.i("------111-----","11111");
                     ret = new DiscoveryRecommend();
                     ret.parseJSON(json);
 
@@ -165,6 +165,28 @@ public final class DataParser  {
         }
 
         return ret;
+
+    }
+
+    public static HotRecommendClickShow parseDiscoveryHotRecommend(JSONObject json) {
+
+        HotRecommendClickShow ret =null;
+        if (json != null) {
+            try {
+                int code = json.getInt("ret");
+                if (code==0)
+                {
+                    ret = new HotRecommendClickShow();
+                    ret.parseJSON(json);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Log.i("#########","&&经过解析的数据----"+ret);
+        return  ret;
 
     }
 }

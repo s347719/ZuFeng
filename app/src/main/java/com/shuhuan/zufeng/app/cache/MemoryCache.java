@@ -40,7 +40,6 @@ public class MemoryCache {
      *
      */
     private LruCache<String ,Bitmap> lruCache;
-
     /**
      * 软引用
      */
@@ -73,7 +72,7 @@ public class MemoryCache {
                     //高度也就是行数
                     int bitmapHeight = value.getHeight();
 
-                    ret = rawBytes*bitmapHeight;//  4 是 4个字节，颜色是四个字节组成
+                    ret = rawBytes*bitmapHeight;
 
                 }
 

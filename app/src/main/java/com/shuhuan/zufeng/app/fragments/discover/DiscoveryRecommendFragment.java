@@ -1,5 +1,7 @@
 package com.shuhuan.zufeng.app.fragments.discover;
 
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.shuhuan.zufeng.app.Constants;
+import com.shuhuan.zufeng.app.HotRecommendActivity;
 import com.shuhuan.zufeng.app.R;
 import com.shuhuan.zufeng.app.adapters.DiscoveryRecommendAdapter;
 import com.shuhuan.zufeng.app.model.DiscoveryRecommend;
@@ -38,22 +43,39 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View ret =  inflater.inflate(R.layout.fragment_discovery_recommend, container, false);
-        ListView listView = (ListView) ret.findViewById(R.id.discovery_recommend_list);
+//        Thread.UncaughtExceptionHandler handler =
+//                new UncaughtExceptionHandlerimpl(getActivity().getApplicationContext());
+//        Thread.setDefaultUncaughtExceptionHandler(handler);
 
-        if (listView != null) {
-            //TODO  设置实际数据的  Adapter
-        ////////////////////////////////
+        PullToRefreshListView pullToRefreshListView =
+                (PullToRefreshListView)ret.findViewById(R.id.discovery_recommend_list);
 
-            Thread.UncaughtExceptionHandler handler =
-                    new UncaughtExceptionHandlerimpl(getActivity().getApplicationContext());
-            Thread.setDefaultUncaughtExceptionHandler(handler);
-
+        if (pullToRefreshListView != null) {
             adapter = new DiscoveryRecommendAdapter(getActivity());
+
             adapter.setOnClickListener(this);
-            listView.setAdapter(adapter);
+
+            pullToRefreshListView.setAdapter(adapter);
+            pullToRefreshListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+
+            ListView listView = pullToRefreshListView.getRefreshableView();
+            listView.setDivider(new ColorDrawable(0xff999999));
+            listView.setDividerHeight(5);
 
         }
 
+
+//        ListView listView = (ListView) ret.findViewById(R.id.discovery_recommend_list);
+//        if (listView != null) {
+//            //TODO  设置实际数据的  Adapter
+//        ////////////////////////////////
+//
+//            adapter = new DiscoveryRecommendAdapter(getActivity());
+//            adapter.setOnClickListener(this);
+//            listView.setAdapter(adapter);
+//
+//        }
+//
 
 
         return ret;
@@ -94,6 +116,7 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
             }
             else {
                 // 点到数据上了
+
             }
         }
         Toast.makeText(activity,"点击了"+position,Toast.LENGTH_SHORT).show();
@@ -161,8 +184,12 @@ public class DiscoveryRecommendFragment extends Fragment implements AdapterView.
                         String trackId = ss[2];
                         //TODO 调用接口20
                         Log.i("---------","albumId"+albumId);
-                        Log.i("---------","trackId"+trackId);
+                        Log.i("---------", "trackId" + trackId);
 
+                        Intent intent = new Intent(getActivity(), HotRecommendActivity.class);
+                        intent.putExtra("trackId",trackId);
+                        intent.putExtra("albumId",albumId);
+                        startActivity(intent);
                     }
                 }
             }

@@ -24,4 +24,6 @@
     <string name="title_activity_base">BaseActivity</string>
     <string name="the_title">标题</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_hot_recommend">HotRecommendActivity</string>
+    <string name="test">测试</string>
 </resources>

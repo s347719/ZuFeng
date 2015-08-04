@@ -83,7 +83,6 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
             ret = 3 +hotCount;
         }
-        Log.d("--------", "ret = " + ret);
         return ret;
     }
 
@@ -147,7 +146,6 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
         Object item = getItem(position);
 
         int itemViewType = getItemViewType(position);
-//        Log.i("------","itemViewType = " + itemViewType);
         switch (itemViewType)
         {
             case 0:
@@ -339,11 +337,15 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
                 //  索引0  用于 ImageView 图片错位问题
                 //  其他两个，用户 ImageView 点击时间的处理的
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
                 img.setTag(
                         new String[]{coverLarge,
                         Integer.toString(recommend.getAlbumId()),
                         Integer.toString(recommend.getTrackId())});
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if (coverLarge != null && needLoad) {
 
                     ImageLoadTask task = new ImageLoadTask(img);
@@ -434,7 +436,6 @@ public class DiscoveryRecommendAdapter extends BaseAdapter {
 
         /////////////////////////////////////////
 
-//        Log.i("-------@@@@------","@@@@@");
 
         List<AlbumRecommend> list = albums.getList();
 

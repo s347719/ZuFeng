@@ -65,11 +65,6 @@ private String url;
                     options.inJustDecodeBounds = true;
                     ret = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
-                    MyLog.d(TAG,"First ret = " + ret);
-                    MyLog.d(TAG,"outHeight = "+options.outHeight);
-                    MyLog.d(TAG,"outHeight = "+options.outWidth);
-                    MyLog.d(TAG,"outHeight = "+options.outMimeType);
-
                     // 2,计算原始尺寸与目标尺寸的采样比例  看API
                     //   Develop Loading Large Bitmaps Efficiently
                     //   查看 Util 工具类中的 ImageUtil.class

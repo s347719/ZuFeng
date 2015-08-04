@@ -1,0 +1,211 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="com.shuhuan.zufeng.app.HotRecommendActivity">
+
+   <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           >
+
+       <TextView
+               android:id="@+id/hot_recommend_title_albumback"
+               android:layout_width="0dp"
+               android:layout_height="50dp"
+               android:layout_weight="1"
+               android:drawableLeft="@mipmap/ic_action_previous_item"
+
+               />
+
+
+       <TextView
+               android:id="@+id/hot_recommend_title_albumtitle"
+               android:layout_width="0dp"
+               android:layout_weight="5"
+               android:layout_height="50dp"
+               android:textSize="20sp"
+               android:singleLine="true"
+               android:focusable="true"
+               android:focusableInTouchMode="true"
+               android:ellipsize="marquee"
+               android:marqueeRepeatLimit="marquee_forever"
+               android:layout_gravity="center_horizontal"
+               android:text="@string/test"
+               />
+
+       <TextView
+               android:layout_width="0dp"
+               android:layout_height="50dp"
+               android:layout_weight="1"
+               android:background="@mipmap/ic_action_overflow"
+               />
+
+   </LinearLayout>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            >
+        <ImageView
+                android:id="@+id/hot_recommend_title_coverlarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@mipmap/mayun1"
+                />
+
+        <ImageView
+                android:id="@+id/hot_commend_title_albumimage"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_toRightOf="@+id/hot_recommend_title_coverlarge"
+                android:background="@mipmap/ceshil"
+                />
+        <TextView
+                android:id="@+id/hot_recommend_title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="测试"
+                android:layout_toRightOf="@+id/hot_commend_title_albumimage"
+                />
+
+        <TextView
+                android:id="@+id/hot_recommend_title_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="测试"
+                android:textSize="15sp"
+                android:layout_alignLeft="@+id/hot_commend_title_albumimage"
+                android:layout_alignParentBottom="true"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                />
+    </RelativeLayout>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F000"
+            />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            >
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                >
+            <!-- 下面的控件都是通过 getChildAt（） 来获取-->
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:background="@mipmap/ic_action_half_important"
+                    />
+
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:textColor="#F000"
+                    android:textSize="20dp"
+                    android:gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:text="收藏"
+                    />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                >
+            <!-- 下面的控件都是通过 getChildAt（） 来获取-->
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:background="@mipmap/ic_action_previous_item"
+                    />
+
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="50dp"
+                    android:textColor="#F000"
+                    android:textSize="20dp"
+                    android:gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:text="批量下载"
+                    />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                >
+            <!-- 下面的控件都是通过 getChildAt（） 来获取-->
+            <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:src="@mipmap/ic_action_view_as_list"
+                    />
+
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="50dp"
+                    android:textColor="#F000"
+                    android:textSize="20dp"
+                    android:gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:text="相关推荐"
+                    />
+        </LinearLayout>
+
+
+
+</LinearLayout>
+
+<TextView
+android:layout_width="match_parent"
+android:layout_height="1dp"
+android:background="#F000"
+            />
+
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/item_recommend_album_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+
+</LinearLayout>

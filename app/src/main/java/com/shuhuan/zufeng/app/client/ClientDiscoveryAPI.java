@@ -26,6 +26,59 @@ public class ClientDiscoveryAPI {
     //////////////////////////////////
 
 
+    /**
+     *
+     *
+     * 	http://mobile.ximalaya.com/mobile/others/ca/album/track/203355/true/1/20?device=android&pageSize=20&albumId=203355&isAsc=true
+     *
+     * 	热门推荐模块中的专辑
+     *
+     * 	其中albumId 是根据传过来的值来改变的
+     *
+     *
+     * @return
+     */
+    public static String getHotRecommendAlbumClick(String type) {
+
+
+        Log.i("======","传过来的AlbumId===="+type);
+        String ret = null;
+
+        String url = SERVER_MOBILE+
+                "/mobile"
+                +"/others"
+                +"/ca"
+                +"/album"
+                +"/track/"
+                +type
+                +"/true"
+                +"/1"
+                +"/20"
+                +"?device=android"
+                +"&pageSize=20"
+                +"&albumId="
+                +type
+                +"&isAsc=true";
+
+            Log.i("=====","======"+ url);
+
+        byte[] bytes = HttpUtil.doGet(url);
+
+        if (bytes != null) {
+
+            try {
+                ret = new String(bytes,"UTF-8");
+
+                Log.i("-------","联网取到的数据=="+ret);
+            } catch (UnsupportedEncodingException e) {
+                ret = new String(bytes);
+            }
+        }
+
+
+        return ret;
+
+    }
 
     /**
      * 获取 发现 －》 推荐的内容<br/>
@@ -155,6 +208,7 @@ public class ClientDiscoveryAPI {
         }
         return ret;
     }
+
 
 
 }

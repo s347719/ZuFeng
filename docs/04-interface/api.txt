@@ -212,8 +212,11 @@ http://mobile.ximalaya.com/mobile/discovery/v1/category/album
 	status	0
 	tagName	tname名称
 
-17. 分类4. 专辑 203355 中 第一页共 20条信息的播放列表信息
+17.. 分类4 专辑 203355 中 第一页共 20条信息的播放列表信息
 
+
+albumId2779704
+trackId7831009
 URL:
 
 	http://mobile.ximalaya.com/mobile/others/ca/album/track/203355/true/1/20?device=android&pageSize=20&albumId=203355&isAsc=true
